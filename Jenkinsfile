@@ -9,7 +9,7 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git 'https://github.com/Pavithrabca1/pavi-devops.git'
+                git branch: 'main', url: 'https://github.com/Pavithrabca1/pavi-devops.git'
             }
         }
 
