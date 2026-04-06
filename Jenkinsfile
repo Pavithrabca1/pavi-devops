@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_USER = credentials('dockerhub-creds').username
-        DOCKER_PASS = credentials('dockerhub-creds').password
+        DOCKER_CREDS = credentials('dockerhub-creds')
     }
 
     stages {
@@ -22,19 +21,19 @@ pipeline {
 
         stage('Tag') {
             steps {
-                sh 'docker tag devops-app $DOCKER_USER/devops-pavi:latest'
+                sh 'docker tag devops-app pavited/devops-pavi:latest'
             }
         }
 
         stage('Login') {
             steps {
-                sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                sh 'echo $DOCKER_CREDS_PSW | docker login -u $DOCKER_USER --password-stdin'
             }
         }
 
         stage('Push') {
             steps {
-                sh 'docker push $DOCKER_USER/devops-pavi:latest'
+                sh 'docker push pavited/devops-pavi:latest'
             }
         }
 
